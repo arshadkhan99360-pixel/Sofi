@@ -39,12 +39,12 @@ jobs:
 
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager \
             --sdk_root=$HOME/.buildozer/android/platform/android-sdk \
-            "ndk;23.1.7779620"
+            "ndk;25.2.9519653"
 
       - name: Set Buildozer paths
         run: |
           echo "ANDROIDSDK=$HOME/.buildozer/android/platform/android-sdk" >> $GITHUB_ENV
-          echo "ANDROIDNDK=$HOME/.buildozer/android/platform/android-sdk/ndk/23.1.7779620" >> $GITHUB_ENV
+          echo "ANDROIDNDK=$HOME/.buildozer/android/platform/android-sdk/ndk/25.2.9519653" >> $GITHUB_ENV
           echo "ANDROIDAPI=33" >> $GITHUB_ENV
           echo "ANDROIDMINAPI=24" >> $GITHUB_ENV
 
