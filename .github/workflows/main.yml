@@ -20,40 +20,35 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      - name: Install system packages
+      - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install -y python3-pip git zip unzip openjdk-17-jdk
-
-      - name: Install Build tools
-        run: |
+          sudo apt install -y python3-pip zip unzip git openjdk-17-jdk
           python3 -m pip install --upgrade pip
           pip install buildozer cython==0.29.36
-          pip install --upgrade python-for-android
 
-      - name: Install Android SDK
+      - name: Install Android SDK for Buildozer
         run: |
-          mkdir -p $HOME/android-sdk
+          mkdir -p $HOME/.buildozer/android/platform/android-sdk
+
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager \
-            --sdk_root=$HOME/android-sdk \
+            --sdk_root=$HOME/.buildozer/android/platform/android-sdk \
             "platform-tools" \
             "platforms;android-33" \
             "build-tools;33.0.2"
 
-      - name: Install Android NDK
-        run: |
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager \
-            --sdk_root=$HOME/android-sdk \
+            --sdk_root=$HOME/.buildozer/android/platform/android-sdk \
             "ndk;23.1.7779620"
 
-      - name: Configure Android paths
+      - name: Set Buildozer paths
         run: |
-          echo "ANDROIDSDK=$HOME/android-sdk" >> $GITHUB_ENV
-          echo "ANDROIDNDK=$HOME/android-sdk/ndk/23.1.7779620" >> $GITHUB_ENV
+          echo "ANDROIDSDK=$HOME/.buildozer/android/platform/android-sdk" >> $GITHUB_ENV
+          echo "ANDROIDNDK=$HOME/.buildozer/android/platform/android-sdk/ndk/23.1.7779620" >> $GITHUB_ENV
           echo "ANDROIDAPI=33" >> $GITHUB_ENV
           echo "ANDROIDMINAPI=24" >> $GITHUB_ENV
 
-      - name: Clean Buildozer
+      - name: Clean previous build
         run: |
           rm -rf .buildozer
 
