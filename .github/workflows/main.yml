@@ -10,6 +10,12 @@ jobs:
   build:
     runs-on: ubuntu-22.04
 
+    env:
+      ANDROIDSDK: /home/runner/.buildozer/android/platform/android-sdk
+      ANDROIDNDK: /home/runner/.buildozer/android/platform/android-ndk-r25b
+      ANDROIDAPI: 35
+      ANDROIDMINAPI: 24
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -56,11 +62,17 @@ jobs:
           $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager \
           $HOME/.buildozer/android/platform/android-sdk/tools/bin/sdkmanager
 
+          ln -sf \
+          $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager \
+          $HOME/.buildozer/android/platform/android-sdk/tools/bin/avdmanager
+
       - name: Build APK
         run: |
-          export ANDROIDSDK=$HOME/.buildozer/android/platform/android-sdk
-          export PATH=$ANDROIDSDK/cmdline-tools/latest/bin:$ANDROIDSDK/tools/bin:$PATH
+          export ANDROID_HOME=$ANDROIDSDK
+          export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/tools/bin:$PATH
+
           yes | sdkmanager --licenses
+
           buildozer android debug
 
       - name: Upload APK
