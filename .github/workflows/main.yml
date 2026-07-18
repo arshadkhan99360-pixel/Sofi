@@ -23,19 +23,14 @@ jobs:
       - name: Install system packages
         run: |
           sudo apt update
-          sudo apt install -y \
-            python3-pip \
-            git \
-            zip \
-            unzip \
-            openjdk-17-jdk
+          sudo apt install -y python3-pip git zip unzip openjdk-17-jdk
 
       - name: Install Buildozer
         run: |
           python3 -m pip install --upgrade pip
           pip install buildozer cython==0.29.36
 
-      - name: Install Android SDK tools
+      - name: Install Android SDK
         run: |
           mkdir -p $HOME/android-sdk
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager \
@@ -50,16 +45,20 @@ jobs:
             --sdk_root=$HOME/android-sdk \
             "ndk;23.1.7779620"
 
-      - name: Configure environment
+      - name: Configure Android paths
         run: |
           echo "ANDROIDSDK=$HOME/android-sdk" >> $GITHUB_ENV
           echo "ANDROIDNDK=$HOME/android-sdk/ndk/23.1.7779620" >> $GITHUB_ENV
           echo "ANDROIDAPI=33" >> $GITHUB_ENV
           echo "ANDROIDMINAPI=24" >> $GITHUB_ENV
 
+      - name: Prepare Buildozer
+        run: |
+          rm -rf .buildozer
+          buildozer android clean
+
       - name: Build APK
         run: |
-          buildozer android clean
           buildozer android debug
 
       - name: Upload APK
