@@ -51,7 +51,19 @@ jobs:
       - name: Clean previous build
         run: |
           rm -rf .buildozer
+      - name: Fix Android SDK manager path
+        run: |
+          mkdir -p $HOME/.buildozer/android/platform/android-sdk/cmdline-tools
+          ln -s $ANDROID_HOME/cmdline-tools/latest \
+          $HOME/.buildozer/android/platform/android-sdk/cmdline-tools/latest
 
+          mkdir -p $HOME/.buildozer/android/platform/android-sdk/tools/bin
+          ln -s $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager \
+          $HOME/.buildozer/android/platform/android-sdk/tools/bin/sdkmanager
+
+      - name: Build APK
+        run: |
+          buildozer android debug
       - name: Build APK
         run: |
           buildozer android debug
