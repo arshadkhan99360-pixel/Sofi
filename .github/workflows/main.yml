@@ -56,7 +56,7 @@ jobs:
           $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager \
           $HOME/.buildozer/android/platform/android-sdk/tools/bin/sdkmanager
 
-            - name: Build APK
+      - name: Build APK
         run: |
           export ANDROIDSDK=$HOME/.buildozer/android/platform/android-sdk
           export PATH=$ANDROIDSDK/cmdline-tools/latest/bin:$ANDROIDSDK/tools/bin:$PATH
