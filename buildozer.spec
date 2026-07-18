@@ -109,7 +109,7 @@ android.permissions = INTERNET, RECORD_AUDIO, READ_EXTERNAL_STORAGE, WRITE_EXTER
 #android.features = android.hardware.usb.host
 
 # (int) Target Android API, should be as high as possible.
-android.api = 33
+android.minapi = 24android.api = 33
 
 # (int) Minimum API your APK / AAB will support.
 android.minapi = 24
@@ -128,12 +128,6 @@ android.ndk = 23b
 
 # (str) Android SDK directory (if empty, it will be automatically downloaded.)
 #android.sdk_path =
-
-# (str) Android API to use
-android.api = 33
-
-# (str) Minimum API required
-android.minapi = 24
 
 # (str) ANT directory (if empty, it will be automatically downloaded.)
 #android.ant_path =
