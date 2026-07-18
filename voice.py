@@ -13,7 +13,7 @@ class SofiVoice:
 
 
     def speak(self, text):
-
+print("Sofi is trying to speak:", text)
         if not self.available:
             print("Sofi Voice:", text)
             return
