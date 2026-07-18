@@ -37,6 +37,17 @@ jobs:
             autoconf automake libtool \
             pkg-config zlib1g-dev
 
+      - name: Install Android SDK Tools
+        run: |
+          mkdir -p $HOME/.buildozer/android/platform/android-sdk
+
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager \
+            --sdk_root=$HOME/.buildozer/android/platform/android-sdk \
+            "platform-tools" \
+            "platforms;android-35" \
+            "build-tools;35.0.0" \
+            "ndk;25.2.9519653"
+
       - name: Build APK
         run: |
           buildozer android debug
