@@ -123,11 +123,20 @@ android.ndk = 23b
 # (int) Android NDK API to use. This is the minimum API your app will support, it should usually match android.minapi.
 #android.ndk_api = 21
 
- (str) Android NDK directory (if empty, it will be automatically downloaded.)
+ # (str) Android NDK version to use
+android.ndk = 23b
+
+# (str) Android NDK directory (if empty, it will be automatically downloaded.)
 #android.ndk_path =
 
- (str) Android SDK directory (if empty, it will be automatically downloaded.)
+# (str) Android SDK directory (if empty, it will be automatically downloaded.)
 #android.sdk_path =
+
+# (str) Android API to use
+android.api = 33
+
+# (str) Minimum API required
+android.minapi = 24
 
 # (str) ANT directory (if empty, it will be automatically downloaded.)
 #android.ant_path =
